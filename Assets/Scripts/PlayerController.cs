@@ -20,17 +20,25 @@ public class PlayerController : MonoBehaviour
 
    void OnMove(InputValue movementValue)
    {
-   Vector2 movementVector = movementValue.Get<Vector2>();
+   	Vector2 movementVector = movementValue.Get<Vector2>();
    
-   movementX = movementVector.x;
-   movementY = movementVector.y;
+   	movementX = movementVector.x;
+   	movementY = movementVector.y;
    }
    
    
    void FixedUpdate()
    {
-   Vector3 movement = new Vector3 (movementX, 0.0f, movementY);
+   	Vector3 movement = new Vector3 (movementX, 0.0f, movementY);
    
-   rb.AddForce(movement * speed);
+   	rb.AddForce(movement * speed);
+   }
+   
+   private void OnTriggerEnter(Collider other)
+   {
+   if(other.gameObject.CompareTag("Pickup"))
+   {
+      	other.gameObject.SetActive(false);
+   }
    }
 }
